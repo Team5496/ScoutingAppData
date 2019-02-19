@@ -38,17 +38,21 @@
             this.ValueBox = new System.Windows.Forms.TextBox();
             this.AddBtn = new System.Windows.Forms.Button();
             this.ApplyBtn = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.EventBox = new System.Windows.Forms.ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -59,7 +63,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.FiltersBox);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 385);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 360);
             this.splitContainer1.SplitterDistance = 394;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -70,8 +74,9 @@
             this.DataBox.ItemHeight = 18;
             this.DataBox.Location = new System.Drawing.Point(0, 0);
             this.DataBox.Name = "DataBox";
-            this.DataBox.Size = new System.Drawing.Size(394, 385);
+            this.DataBox.Size = new System.Drawing.Size(394, 360);
             this.DataBox.TabIndex = 0;
+            this.DataBox.SelectedIndexChanged += new System.EventHandler(this.DataBox_SelectedIndexChanged);
             // 
             // FiltersBox
             // 
@@ -80,7 +85,7 @@
             this.FiltersBox.ItemHeight = 18;
             this.FiltersBox.Location = new System.Drawing.Point(0, 0);
             this.FiltersBox.Name = "FiltersBox";
-            this.FiltersBox.Size = new System.Drawing.Size(402, 294);
+            this.FiltersBox.Size = new System.Drawing.Size(402, 269);
             this.FiltersBox.TabIndex = 0;
             this.FiltersBox.SelectedIndexChanged += new System.EventHandler(this.FiltersBox_SelectedIndexChanged);
             // 
@@ -93,7 +98,7 @@
             this.panel1.Controls.Add(this.AddBtn);
             this.panel1.Controls.Add(this.ApplyBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 294);
+            this.panel1.Location = new System.Drawing.Point(0, 269);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(402, 91);
             this.panel1.TabIndex = 1;
@@ -107,6 +112,7 @@
             this.RemoveBtn.TabIndex = 7;
             this.RemoveBtn.Text = "Remove";
             this.RemoveBtn.UseVisualStyleBackColor = true;
+            this.RemoveBtn.Click += new System.EventHandler(this.RemoveBtn_Click);
             // 
             // OperatorBox
             // 
@@ -164,6 +170,29 @@
             this.ApplyBtn.TabIndex = 2;
             this.ApplyBtn.Text = "Apply";
             this.ApplyBtn.UseVisualStyleBackColor = true;
+            this.ApplyBtn.Click += new System.EventHandler(this.ApplyBtn_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.EventBox});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(39, 22);
+            this.toolStripLabel1.Text = "Event:";
+            // 
+            // EventBox
+            // 
+            this.EventBox.Name = "EventBox";
+            this.EventBox.Size = new System.Drawing.Size(121, 25);
             // 
             // MainForm
             // 
@@ -171,10 +200,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 385);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.toolStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scouting Data";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -182,7 +213,10 @@
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -198,5 +232,8 @@
         private System.Windows.Forms.ComboBox KeyBox;
         private System.Windows.Forms.TextBox ValueBox;
         private System.Windows.Forms.Button RemoveBtn;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox EventBox;
     }
 }

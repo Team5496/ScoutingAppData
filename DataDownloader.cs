@@ -13,8 +13,6 @@ namespace ScoutingAppData
 {
     public partial class DataDownloader : Form
     {
-        ScoutingClient Client;
-
         public DataDownloader()
         {
             InitializeComponent();
@@ -24,15 +22,15 @@ namespace ScoutingAppData
         {
         }
 
-        public TReturn ShowUntil<TReturn>(Task<TReturn> T)
+        public void ShowUntil(Task T)
         {
             Show();
             while (!T.IsCompleted)
             {
                 Application.DoEvents();
-                Thread.Sleep(1);
+                Thread.Sleep(1); // So it doesn't completely blast the CPU
             }
-            return T.Result;
+            Close();
         }
     }
 }

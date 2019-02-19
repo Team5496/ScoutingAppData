@@ -17,10 +17,10 @@ namespace ScoutingAppData
             Client = new FirebaseClient("https://scoutingappstart.firebaseio.com/");
         }
 
-        public Dictionary<string, string> GetMatch(string Event, int Team, int Match)
+        public async Task<Dictionary<string, string>> GetMatch(string Event, string Team, string Match)
         {
             string Path = "events/" + Event + "/teams/" + Team + "/matches/" + Match;
-            Dictionary<string, string> Properties = GetDictionary<string>(Path).Result;
+            Dictionary<string, string> Properties = await GetDictionary<string>(Path);
             Properties["event"] = Event;
             Properties["team"] = Team.ToString();
             Properties["match"] = Match.ToString();
@@ -51,7 +51,6 @@ namespace ScoutingAppData
 
         public async Task<Dictionary<string, T>> GetDictionary<T>(string Path)
         {
-            DateTime Start = DateTime.Now;
             OrderQuery Query = Client.Child(Path).OrderByKey();
             List<FirebaseObject<T>> Objects = (await Query.OnceAsync<T>()).ToList();
             Dictionary<string, T> D = new Dictionary<string, T>();
@@ -59,7 +58,6 @@ namespace ScoutingAppData
             {
                 D.Add(Obj.Key, Obj.Object);
             }
-            Console.WriteLine((DateTime.Now - Start));
             return D;
         }
     }

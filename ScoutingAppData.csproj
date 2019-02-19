@@ -68,6 +68,12 @@
     <Compile Include="DataDownloader.Designer.cs">
       <DependentUpon>DataDownloader.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataViewer.Designer.cs">
+      <DependentUpon>DataViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Filter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -86,6 +92,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DataDownloader.resx">
       <DependentUpon>DataDownloader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataViewer.resx">
+      <DependentUpon>DataViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
