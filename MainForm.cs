@@ -27,6 +27,11 @@ namespace ScoutingAppData
             UpdateFilters();
         }
 
+        void DownloadKeys()
+        {
+
+        }
+
         void UpdateButtons()
         {
             AddBtn.Enabled = (KeyBox.Text != "" && ValueBox.Text != "" && OperatorBox.Text != "");
