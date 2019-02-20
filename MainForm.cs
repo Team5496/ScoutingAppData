@@ -29,24 +29,25 @@ namespace ScoutingAppData
             UpdateButtons();
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
+        private void AddFilterBtn_Click(object sender, EventArgs e)
         {
+            NameConverter Converter = new NameConverter();
             Filters.Add(new Filter(KeyBox.Text, OperatorBox.Text[0], ValueBox.Text));
             UpdateFilters();
             UpdateButtons();
         }
 
-        private void RemoveBtn_Click(object sender, EventArgs e)
+        private void RemoveFilterBtn_Click(object sender, EventArgs e)
         {
             Filters.RemoveAt(FiltersBox.SelectedIndex);
             UpdateFilters();
             UpdateButtons();
         }
 
-        private void ApplyBtn_Click(object sender, EventArgs e)
+        private void ApplyFilterBtn_Click(object sender, EventArgs e)
         {
             DataDownloader Downlaoder = new DataDownloader();
-            Downlaoder.ShowUntil(Apply());
+            Downlaoder.ShowUntil(ApplyFilters());
         }
     
         async Task GetItems()
@@ -58,35 +59,56 @@ namespace ScoutingAppData
             KeyBox.Items.Clear();
             string Team = (await Client.GetTeams(EventBox.Text))[0];
             string Match = (await Client.GetMatches(EventBox.Text, Team))[0];
-            KeyBox.Items.AddRange((await Client.GetMatch(EventBox.Text, Team, Match)).Keys.ToArray());
+
+            string[] Keys = (await Client.GetMatch(EventBox.Text, Team, Match)).Keys.ToArray();
+            KeyBox.Items.AddRange(Keys);
+            SortBox.Items.AddRange(Keys);
+            SortBox.Items.Add("(none)");
             KeyBox.Text = "team";
+            SortBox.Text = "(none)";
         }
 
-        async Task Apply()
+        async Task ApplyFilters()
         {
             DataBox.Items.Clear();
             MatchDatas.Clear();
             string Event = EventBox.Text;
             List<string> Teams = await Client.GetTeams(Event);
-            foreach(string Team in Teams)
+            foreach (string Team in Teams)
             {
                 List<string> Matches = await Client.GetMatches(Event, Team);
-                foreach(string Match in Matches)
+                foreach (string Match in Matches)
                 {
                     Dictionary<string, string> MatchData = await Client.GetMatch(Event, Team, Match);
                     if (TestFilters(MatchData))
                     {
                         MatchDatas.Add(MatchData);
-                        DataBox.Items.Add("Team " + Team + " in match " + Match);
                     }
                 }
+            }
+            if (SortBox.Text != "(none)")
+            {
+                MatchDatas = MatchDatas.OrderBy(X =>
+                {
+                    int Result;
+                    if (int.TryParse(X[SortBox.Text], out Result))
+                    {
+                        return Result;
+                    }
+                    return 0;
+                }).ToList();
+            }
+            foreach (Dictionary<string, string> Data in MatchDatas)
+            {
+                DataBox.Items.Add("Team " + Data["team"] + " in match " + Data["match"]);
             }
         }
 
         bool TestFilters(Dictionary<string, string> Data)
         {
-            foreach(Filter F in Filters)
+            foreach (Filter F in Filters)
             {
+                Console.WriteLine("Unconverted: " + F.A);
                 int ResultA, ResultB;
                 switch (F.Operator)
                 {
@@ -110,8 +132,8 @@ namespace ScoutingAppData
 
         void UpdateButtons()
         {
-            AddBtn.Enabled = (KeyBox.Text != "" && ValueBox.Text != "" && OperatorBox.Text != "");
-            RemoveBtn.Enabled = (FiltersBox.SelectedItem != null);
+            AddFilterBtn.Enabled = (KeyBox.Text != "" && ValueBox.Text != "" && OperatorBox.Text != "");
+            RemoveFilterBtn.Enabled = (FiltersBox.SelectedItem != null);
         }
 
         void UpdateFilters()

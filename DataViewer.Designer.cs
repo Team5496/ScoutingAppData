@@ -46,9 +46,10 @@
             // DataLabel
             // 
             this.DataLabel.AutoSize = true;
+            this.DataLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataLabel.Location = new System.Drawing.Point(3, 9);
             this.DataLabel.Name = "DataLabel";
-            this.DataLabel.Size = new System.Drawing.Size(20, 18);
+            this.DataLabel.Size = new System.Drawing.Size(36, 19);
             this.DataLabel.TabIndex = 0;
             this.DataLabel.Text = "...";
             // 
@@ -62,6 +63,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DataViewer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data Viewer";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

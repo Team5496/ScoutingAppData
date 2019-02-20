@@ -32,15 +32,17 @@
             this.DataBox = new System.Windows.Forms.ListBox();
             this.FiltersBox = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.RemoveBtn = new System.Windows.Forms.Button();
+            this.RemoveFilterBtn = new System.Windows.Forms.Button();
             this.OperatorBox = new System.Windows.Forms.ComboBox();
             this.KeyBox = new System.Windows.Forms.ComboBox();
             this.ValueBox = new System.Windows.Forms.TextBox();
-            this.AddBtn = new System.Windows.Forms.Button();
-            this.ApplyBtn = new System.Windows.Forms.Button();
+            this.AddFilterBtn = new System.Windows.Forms.Button();
+            this.ApplyFilterBtn = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.EventBox = new System.Windows.Forms.ToolStripComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SortBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -52,7 +54,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 29);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -63,7 +65,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.FiltersBox);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 360);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 371);
             this.splitContainer1.SplitterDistance = 394;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -74,7 +76,7 @@
             this.DataBox.ItemHeight = 18;
             this.DataBox.Location = new System.Drawing.Point(0, 0);
             this.DataBox.Name = "DataBox";
-            this.DataBox.Size = new System.Drawing.Size(394, 360);
+            this.DataBox.Size = new System.Drawing.Size(394, 371);
             this.DataBox.TabIndex = 0;
             this.DataBox.SelectedIndexChanged += new System.EventHandler(this.DataBox_SelectedIndexChanged);
             // 
@@ -85,34 +87,36 @@
             this.FiltersBox.ItemHeight = 18;
             this.FiltersBox.Location = new System.Drawing.Point(0, 0);
             this.FiltersBox.Name = "FiltersBox";
-            this.FiltersBox.Size = new System.Drawing.Size(402, 269);
+            this.FiltersBox.Size = new System.Drawing.Size(402, 237);
             this.FiltersBox.TabIndex = 0;
             this.FiltersBox.SelectedIndexChanged += new System.EventHandler(this.FiltersBox_SelectedIndexChanged);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.RemoveBtn);
+            this.panel1.Controls.Add(this.SortBox);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.RemoveFilterBtn);
             this.panel1.Controls.Add(this.OperatorBox);
             this.panel1.Controls.Add(this.KeyBox);
             this.panel1.Controls.Add(this.ValueBox);
-            this.panel1.Controls.Add(this.AddBtn);
-            this.panel1.Controls.Add(this.ApplyBtn);
+            this.panel1.Controls.Add(this.AddFilterBtn);
+            this.panel1.Controls.Add(this.ApplyFilterBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 269);
+            this.panel1.Location = new System.Drawing.Point(0, 237);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(402, 91);
+            this.panel1.Size = new System.Drawing.Size(402, 134);
             this.panel1.TabIndex = 1;
             // 
-            // RemoveBtn
+            // RemoveFilterBtn
             // 
-            this.RemoveBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RemoveBtn.Location = new System.Drawing.Point(3, 51);
-            this.RemoveBtn.Name = "RemoveBtn";
-            this.RemoveBtn.Size = new System.Drawing.Size(81, 28);
-            this.RemoveBtn.TabIndex = 7;
-            this.RemoveBtn.Text = "Remove";
-            this.RemoveBtn.UseVisualStyleBackColor = true;
-            this.RemoveBtn.Click += new System.EventHandler(this.RemoveBtn_Click);
+            this.RemoveFilterBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RemoveFilterBtn.Location = new System.Drawing.Point(3, 51);
+            this.RemoveFilterBtn.Name = "RemoveFilterBtn";
+            this.RemoveFilterBtn.Size = new System.Drawing.Size(81, 28);
+            this.RemoveFilterBtn.TabIndex = 7;
+            this.RemoveFilterBtn.Text = "Remove";
+            this.RemoveFilterBtn.UseVisualStyleBackColor = true;
+            this.RemoveFilterBtn.Click += new System.EventHandler(this.RemoveFilterBtn_Click);
             // 
             // OperatorBox
             // 
@@ -150,55 +154,78 @@
             this.ValueBox.TabIndex = 4;
             this.ValueBox.TextChanged += new System.EventHandler(this.ValueBox_TextChanged);
             // 
-            // AddBtn
+            // AddFilterBtn
             // 
-            this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.AddBtn.Location = new System.Drawing.Point(3, 6);
-            this.AddBtn.Name = "AddBtn";
-            this.AddBtn.Size = new System.Drawing.Size(81, 28);
-            this.AddBtn.TabIndex = 3;
-            this.AddBtn.Text = "Add";
-            this.AddBtn.UseVisualStyleBackColor = true;
-            this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
+            this.AddFilterBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.AddFilterBtn.Location = new System.Drawing.Point(3, 6);
+            this.AddFilterBtn.Name = "AddFilterBtn";
+            this.AddFilterBtn.Size = new System.Drawing.Size(81, 28);
+            this.AddFilterBtn.TabIndex = 3;
+            this.AddFilterBtn.Text = "Add";
+            this.AddFilterBtn.UseVisualStyleBackColor = true;
+            this.AddFilterBtn.Click += new System.EventHandler(this.AddFilterBtn_Click);
             // 
-            // ApplyBtn
+            // ApplyFilterBtn
             // 
-            this.ApplyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ApplyBtn.Location = new System.Drawing.Point(309, 51);
-            this.ApplyBtn.Name = "ApplyBtn";
-            this.ApplyBtn.Size = new System.Drawing.Size(81, 28);
-            this.ApplyBtn.TabIndex = 2;
-            this.ApplyBtn.Text = "Apply";
-            this.ApplyBtn.UseVisualStyleBackColor = true;
-            this.ApplyBtn.Click += new System.EventHandler(this.ApplyBtn_Click);
+            this.ApplyFilterBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ApplyFilterBtn.Location = new System.Drawing.Point(309, 94);
+            this.ApplyFilterBtn.Name = "ApplyFilterBtn";
+            this.ApplyFilterBtn.Size = new System.Drawing.Size(81, 28);
+            this.ApplyFilterBtn.TabIndex = 2;
+            this.ApplyFilterBtn.Text = "Apply";
+            this.ApplyFilterBtn.UseVisualStyleBackColor = true;
+            this.ApplyFilterBtn.Click += new System.EventHandler(this.ApplyFilterBtn_Click);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.EventBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(800, 29);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(39, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(51, 26);
             this.toolStripLabel1.Text = "Event:";
             // 
             // EventBox
             // 
+            this.EventBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EventBox.Name = "EventBox";
-            this.EventBox.Size = new System.Drawing.Size(121, 25);
+            this.EventBox.Size = new System.Drawing.Size(121, 29);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(152, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 18);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Sort by:";
+            // 
+            // SortBox
+            // 
+            this.SortBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SortBox.FormattingEnabled = true;
+            this.SortBox.Items.AddRange(new object[] {
+            "test"});
+            this.SortBox.Location = new System.Drawing.Point(217, 53);
+            this.SortBox.Name = "SortBox";
+            this.SortBox.Size = new System.Drawing.Size(172, 26);
+            this.SortBox.TabIndex = 9;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 385);
+            this.ClientSize = new System.Drawing.Size(800, 400);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -226,14 +253,16 @@
         private System.Windows.Forms.ListBox DataBox;
         private System.Windows.Forms.ListBox FiltersBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button ApplyBtn;
-        private System.Windows.Forms.Button AddBtn;
+        private System.Windows.Forms.Button ApplyFilterBtn;
+        private System.Windows.Forms.Button AddFilterBtn;
         private System.Windows.Forms.ComboBox OperatorBox;
         private System.Windows.Forms.ComboBox KeyBox;
         private System.Windows.Forms.TextBox ValueBox;
-        private System.Windows.Forms.Button RemoveBtn;
+        private System.Windows.Forms.Button RemoveFilterBtn;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripComboBox EventBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox SortBox;
     }
 }

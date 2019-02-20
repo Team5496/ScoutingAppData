@@ -19,10 +19,19 @@ namespace ScoutingAppData
 
         public void ViewData(Dictionary<string, string> Data)
         {
-            DataLabel.Text = "";
-            foreach(KeyValuePair<string, string> Pair in Data)
+            List<string> ConvertedKeys = new List<string>();
+            NameConverter Converter = new NameConverter();
+            foreach (string S in Data.Keys)
             {
-                DataLabel.Text += Pair.Key + ": \"" + Pair.Value + "\"\n";
+                ConvertedKeys.Add(Converter.Convert(S));
+            }
+
+            int TabLength = ConvertedKeys.Max(X => X.Length) + 2;
+            string[] Values = Data.Values.ToArray();
+            DataLabel.Text = "";
+            for (int i = 0; i < Data.Count; i++)
+            {
+                DataLabel.Text += ConvertedKeys[i].PadRight(TabLength) + Values[i] + "\n";
             }
             Show();
         }
