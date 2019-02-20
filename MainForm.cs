@@ -23,10 +23,7 @@ namespace ScoutingAppData
             Client = new ScoutingClient();
             MatchDatas = new List<Dictionary<string, string>>();
             Show();
-
-            DataDownloader Downloader = new DataDownloader();
-            Downloader.ShowUntil(GetItems());
-            UpdateButtons();
+            GetItems();
         }
 
         private void AddFilterBtn_Click(object sender, EventArgs e)
@@ -50,7 +47,14 @@ namespace ScoutingAppData
             Downlaoder.ShowUntil(ApplyFilters());
         }
     
-        async Task GetItems()
+        void GetItems()
+        {
+            DataDownloader Downloader = new DataDownloader();
+            Downloader.ShowUntil(GetItemsAsync());
+            UpdateButtons();
+        }
+
+        async Task GetItemsAsync()
         {
             EventBox.Items.Clear();
             EventBox.Items.AddRange((await Client.GetEvents()).ToArray());
@@ -88,15 +92,30 @@ namespace ScoutingAppData
             }
             if (SortBox.Text != "(none)")
             {
-                MatchDatas = MatchDatas.OrderBy(X =>
+                if(SortDirectionBox.Text == "Descending")
                 {
-                    int Result;
-                    if (int.TryParse(X[SortBox.Text], out Result))
+                    MatchDatas = MatchDatas.OrderByDescending(X =>
                     {
-                        return Result;
-                    }
-                    return 0;
-                }).ToList();
+                        int Result;
+                        if (int.TryParse(X[SortBox.Text], out Result))
+                        {
+                            return Result;
+                        }
+                        return 0;
+                    }).ToList();
+                }
+                else
+                {
+                    MatchDatas = MatchDatas.OrderBy(X =>
+                    {
+                        int Result;
+                        if (int.TryParse(X[SortBox.Text], out Result))
+                        {
+                            return Result;
+                        }
+                        return 0;
+                    }).ToList();
+                }
             }
             foreach (Dictionary<string, string> Data in MatchDatas)
             {
@@ -108,7 +127,6 @@ namespace ScoutingAppData
         {
             foreach (Filter F in Filters)
             {
-                Console.WriteLine("Unconverted: " + F.A);
                 int ResultA, ResultB;
                 switch (F.Operator)
                 {
@@ -143,6 +161,11 @@ namespace ScoutingAppData
             {
                 FiltersBox.Items.Add(F.ToString());
             }
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            GetItems();
         }
 
         private void KeyBox_SelectedIndexChanged(object sender, EventArgs e)
